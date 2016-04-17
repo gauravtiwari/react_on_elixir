@@ -16,7 +16,7 @@ defmodule ReactOnElixir.Mixfile do
 
   def application do
     [ mod: {ReactOnElixir, []},
-      applications: [:logger, :poolboy, :porcelain]
+      applications: [:logger, :poolboy]
     ]
   end
 

@@ -8,5 +8,3 @@ config :react_on_elixir,
   	{:size, 10},
   	{:max_overflow, 10}
   ]
-
-config :porcelain, driver: Porcelain.Driver.Basic
