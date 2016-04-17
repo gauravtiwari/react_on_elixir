@@ -9,6 +9,7 @@ defmodule ReactOnElixir.Mixfile do
      elixir: "~> 1.2",
      description: "Server render react components from Elixir",
      build_embedded: (Mix.env == :prod),
+     package: package,
      start_permanent: (Mix.env == :prod),
      deps: deps]
   end
