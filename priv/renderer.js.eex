@@ -1,0 +1,71 @@
+'use strict'
+const app = require('<%= server_bundle_path %>');
+
+// Define stdin and stdout
+const stdin = process.stdin;
+const stdout = process.stdout;
+let component = {};
+
+stdin.resume();
+stdin.setEncoding('utf8');
+
+function isEmpty(object) {
+  for(var key in object) {
+    if(object.hasOwnProperty(key)){
+      return false;
+    }
+  }
+  return true;
+}
+
+function renderToStaticMarkup(element) {
+  return ReactDOMServer.renderToStaticMarkup(element);
+}
+
+function renderToString(element) {
+  return ReactDOMServer.renderToString(element);
+}
+
+function handleRequest(request) {
+  const componentName = request.component;
+  const renderMethod = request.render_type;
+  const props = JSON.parse(request.props);
+
+  let component;
+
+  try {
+    component = eval(componentName);
+  } catch (error) {
+    return ['error', `Component { ${componentName} } not found`];
+  }
+
+  let render
+  switch (renderMethod) {
+    case undefined:
+      render = renderToString;
+      break;
+    case 'static':
+      render = renderToStaticMarkup
+      break;
+    default:
+      render = renderToString;
+      break;
+  }
+
+  return ['ok', render(React.createElement(component, props))];
+}
+
+stdin.on('data', function(data) {
+  const parseData = JSON.parse(data);
+  Object.assign(component, parseData);
+});
+
+stdin.on('end', function () {
+  if(isEmpty(component)) {
+    stdout.write(["error", "Invalid options provided \n"]);
+  } else {
+    const result = handleRequest(component);
+    stdout.write(JSON.stringify(result));
+    stdout.write('\n');
+  }
+});
