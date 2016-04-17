@@ -1,6 +1,5 @@
 defmodule ReactOnElixir do
   use Application
-  require EEx
 
   def start(_type, _args) do
     ReactOnElixir.Supervisor.start_link

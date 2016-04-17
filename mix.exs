@@ -1,10 +1,13 @@
 defmodule ReactOnElixir.Mixfile do
   use Mix.Project
 
+  @version String.strip(File.read!("VERSION"))
+
   def project do
     [app: :react_on_elixir,
-     version: "0.0.1",
+     version: @version,
      elixir: "~> 1.2",
+     description: "Server render react components from Elixir",
      build_embedded: (Mix.env == :prod),
      start_permanent: (Mix.env == :prod),
      deps: deps]
@@ -21,5 +24,12 @@ defmodule ReactOnElixir.Mixfile do
       {:poolboy, "~> 1.5"},
       {:poison, "~> 2.0"}
     ]
+  end
+
+  defp package do
+    [files: ~w(lib priv mix.exs README.md UNLICENSE VERSION),
+     maintainers: ["Gaurav Tiwari"],
+     licenses: ["Unlicense"],
+     links: %{"GitHub" => "https://github.com/gauravtiwari/react_on_elixir"}]
   end
 end
