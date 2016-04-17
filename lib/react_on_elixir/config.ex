@@ -8,7 +8,7 @@ defmodule ReactOnElixir.Config do
 	end
 
 	def renderer_path() do
-		Application.get_env(:react_on_elixir, :renderer_path, Path.join(["#{:code.priv_dir(:react_on_elixir)}"]))
+		Application.get_env(:react_on_elixir, :renderer_path, Path.join(["#{:code.priv_dir(:react_on_elixir)}", "renderer.js.eex"]))
 	end
 
 	def pool_maxoverflow() do

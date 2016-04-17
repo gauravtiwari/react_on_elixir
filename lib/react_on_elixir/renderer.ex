@@ -5,8 +5,6 @@ defmodule ReactOnElixir.Renderer do
 	defmodule RuntimeError, do: defexception [:message]
 
 	def result(component_name, props, render_type) do
-		IO.puts ReactOnElixir.Config.server_bundle_path()
-		IO.puts ReactOnElixir.Config.renderer_path()
 	  program = EEx.eval_file(ReactOnElixir.Config.renderer_path(), [server_bundle_path: ReactOnElixir.Config.server_bundle_path()])
 	  command = "node" |> System.find_executable
 	  tmpfile = compile_to_tempfile(program)
