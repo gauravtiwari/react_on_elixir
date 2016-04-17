@@ -23,7 +23,7 @@ defmodule ReactOnElixir.Mixfile do
   defp deps do
     [
       {:poolboy, "~> 1.5"},
-      {:poison, "~> 2.0"}
+      {:poison, "~> 1.5.2"}
     ]
   end
 
