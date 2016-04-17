@@ -2,21 +2,19 @@ defmodule ReactOnElixir.Supervisor do
 	use Supervisor
 
   def start_link do
-    pool = Application.get_env(:react_on_elixir, :pool)
-    global_or_local = Application.get_env(:react_on_elixir, :global_or_local, :global)
-    Supervisor.start_link(__MODULE__, [pool, global_or_local])
+    Supervisor.start_link(__MODULE__, [])
   end
 
-  def init([pool, global_or_local]) do
+  def init([]) do
     pool_options = [
-      name: {global_or_local, pool[:name]},
+      name: {ReactOnElixir.Config.pool_type(), ReactOnElixir.Config.pool_name()},
       worker_module: ReactOnElixir.Worker,
-      size: pool[:size],
-      max_overflow: pool[:max_overflow]
+      size: ReactOnElixir.Config.pool_size(),
+      max_overflow: ReactOnElixir.Config.pool_maxoverflow()
     ]
 
     children = [
-      :poolboy.child_spec(pool[:name], pool_options, [])
+      :poolboy.child_spec(ReactOnElixir.Config.pool_name(), pool_options, [])
     ]
 
     supervise(children, strategy: :one_for_one)
