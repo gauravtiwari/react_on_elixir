@@ -16,14 +16,15 @@ defmodule ReactOnElixir.Mixfile do
 
   def application do
     [ mod: {ReactOnElixir, []},
-      applications: [:logger, :poolboy]
+      applications: [:logger, :poolboy, :elixir_v8]
     ]
   end
 
   defp deps do
     [
       {:poolboy, "~> 1.5"},
-      {:poison, "~> 1.5.2"}
+      {:poison, "~> 1.5.2"},
+      {:elixir_v8, "~> 0.2.2"}
     ]
   end
 

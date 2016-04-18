@@ -1,4 +1,6 @@
-%{"execjs": {:hex, :execjs, "1.1.3"},
+%{"elixir_v8": {:hex, :elixir_v8, "0.2.2"},
+  "erlang_v8": {:git, "https://github.com/strange/erlang-v8.git", "1ca13321d5746f3ec20f0c0bfd2bcc8293db71da", []},
+  "exjsx": {:hex, :exjsx, "3.2.0"},
+  "jsx": {:hex, :jsx, "2.6.2"},
   "poison": {:hex, :poison, "1.5.2"},
-  "poolboy": {:hex, :poolboy, "1.5.1"},
-  "porcelain": {:hex, :porcelain, "2.0.1"}}
+  "poolboy": {:hex, :poolboy, "1.5.1"}}
